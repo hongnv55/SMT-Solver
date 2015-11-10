@@ -52,7 +52,22 @@ QMap<int,QString> mapVariables;
 int globalIndex = 1;
 
 
-QString convertToBinary(int integer);
+QString convertToBinary(int integer)
+{
+    QString res = QString::number(integer, 2);
+    int lengthOfBinary = res.length();
+    if (lengthOfBinary < BIT_LENGTH)
+    {
+        for (int i = 0; i < (BIT_LENGTH - lengthOfBinary); i++ )
+        {
+            res.push_front("0");
+        }
+
+    }
+    return res;
+}
+
+//generate sum rule to file. rule of x xor y = z
 QString generateSumRule(QString __x, QString __y, QString __z)
 {
 
@@ -124,21 +139,8 @@ QString generateSumRule(QString __x, QString __y, QString __z)
     return result;
 }
 
-QString convertToBinary(int integer)
-{
-    QString res = QString::number(integer, 2);
-    int lengthOfBinary = res.length();
-    if (lengthOfBinary < BIT_LENGTH)
-    {
-        for (int i = 0; i < (BIT_LENGTH - lengthOfBinary); i++ )
-        {
-            res.push_front("0");
-        }
 
-    }
-    return res;
-}
-
+//read sum rule file to generate CNF file
 void generateSumCnfFlie()
 {
 
