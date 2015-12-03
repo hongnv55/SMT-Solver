@@ -1,0 +1,47 @@
+Rules
+
+
+z0 <> (x0 v y0) ^ (!x0 v !y0)
+-	z0 -> (x0 v y0) ^ (!x0 v !y0) 
+	= 	(!z0 v x0 x y0) 
+	  ^ (!z0 v !x0 v !y0)  
+-	(x0 v y0) ^ (!x0 v !y0) -> z0
+	= (x ^ !y) v (!x ^ y) -> z0
+	= !((x ^ !y) v (!x ^ y)) v z0
+	= (!(x ^ !y) ^ !(!x ^ y)) v z0
+	=     (!x0 v y0 v z0) 
+		^ (x0 v !y0 v z0) 
+
+c0 <> x0 ^ y0
+-	c0 -> x0 ^ y0
+	= 	  (!c0 v x0) 
+		^ (!c0 v y0)
+- 	x0 ^ y0 -> c0
+	= !x0 v !y0 v c0
+
+z1 <> (x1 v !y1 v !c0) ^ (!x1 v y1 v !c0) ^ (!x1 v !y1 v c0) ^ (x1 v y1 v c0)
+-	z1 ->  (x1 v !y1 v !c0) ^ (!x1 v y1 v !c0) ^ (!x1 v !y1 v c0) ^ (x1 v y1 v c0)
+	=     (!z1 v x1 v !y1 v !c0) 
+		^ (!z1 v !x1 v y1 v !c0) 
+		^ (!z1 v !x1 v !y1 v c0) 
+		^ (!z1 v x1 v y1 v c0)
+- 	  (x1 v !y1 v !c0) ^ (!x1 v y1 v !c0) ^ (!x1 v !y1 v c0) ^ (x1 v y1 v c0) -> z1 (CNF)
+	= (x1 ^ !y1 ^ !c0) v (!x1 ^ y1 ^ !c0) v (!x1 ^ !y1 ^ c0) v (x1 ^ y1 ^ c0) -> z1 (DNF)
+	= !((x1 ^ !y1 ^ !c0) v (!x1 ^ y1 ^ !c0) v (!x1 ^ !y1 ^ c0) v (x1 ^ y1 ^ c0)) v z1
+	=     (!x1 v y1 v c0 v z1) 
+		^ (x1 v !y1 v c0 v z1) 
+		^ (x1 v y1 v !c0 v z1) 
+		^ (!x1 v !y1 v !c0 v z1)
+
+c1 <> (x1 v y1) ^ (x1 v c0) ^ (y1 v c0)
+- 	c1 -> (x1 v y1) ^ (x1 v c0) ^ (y1 v c0)
+	= 	  (!c1 v x1 v y1) 
+		^ (!c1 v x1 v c0) 
+	    ^ (!c1 v y1 v c0)
+-	(x1 v y1) ^ (x1 v c0) ^ (y1 v c0) -> c1
+	= (x1 ^ y1) v (x1 ^ c0) v (y1 ^ c0) -> c1
+	= !( (x1 ^ y1) v (x1 ^ c0) v (y1 ^ c0) ) v c1
+	=   (!x1 v !y1 v c1) 
+	  ^ (!x1 v !c0 v c1) 
+	  ^ (!y1 v !c0 v c1)
+
